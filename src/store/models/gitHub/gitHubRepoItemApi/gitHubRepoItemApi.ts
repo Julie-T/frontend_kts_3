@@ -2,7 +2,7 @@ import {
   gitHubRepoOwnerApi,
   gitHubRepoOwnerModel,
   normalizeGitHubRepoOwner,
-} from "./gitHubRepoOwnerApi";
+} from "../gitHubRepoOwnerApi";
 
 export type gitHubRepoItemApi = {
   name: string;

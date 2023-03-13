@@ -1,18 +1,18 @@
 import {
-  gitHubRepoItemApi,
-  gitHubRepoItemModel,
-  normalizeGitHubRepoItem,
-} from "@store/models/gitHub/gitHubRepoItemApi";
-import { getRepository, getRepositoryReadme } from "@utils/api";
-import { Meta } from "@utils/meta";
-import { GetRepoItemParams, IRepositoryStore } from "@utils/types";
-import {
   action,
   computed,
   makeObservable,
   observable,
   runInAction,
 } from "mobx";
+import {
+  gitHubRepoItemApi,
+  gitHubRepoItemModel,
+  normalizeGitHubRepoItem,
+} from "store/models/gitHub/gitHubRepoItemApi/gitHubRepoItemApi";
+import { getRepository, getRepositoryReadme } from "utils/api";
+import { Meta } from "utils/meta";
+import { GetRepoItemParams, IRepositoryStore } from "utils/types";
 
 type PrivateFields = "_meta" | "_repoItem" | "_repoReadme" | "_errorMessage";
 
@@ -51,12 +51,13 @@ class RepositoryStore implements IRepositoryStore {
   };
 
   async getRepoItem(params: GetRepoItemParams) {
-    this._repoItem = null;
     this._meta = Meta.loading;
     this.setErrorMessage("");
     const data = await getRepository(params.owner, params.repo);
 
     runInAction(() => {
+      this._repoItem = null;
+
       if (data) {
         try {
           this._repoItem = normalizeGitHubRepoItem(data);

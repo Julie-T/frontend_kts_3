@@ -1,26 +1,3 @@
-import {
-  gitHubRepoItemModel,
-  normalizeGitHubRepoItem,
-} from "@store/models/gitHub/gitHubRepoItemApi";
-import {
-  CollectionModel,
-  getInitialCollectionModel,
-  linearizeCollection,
-  normalizeCollection,
-} from "@store/models/shared/collection";
-import {
-  getRepository,
-  getRepositories,
-  getRepositoriesCount,
-} from "@utils/api";
-import { getMoreFetch } from "@utils/helpers";
-import { logger } from "@utils/logger";
-import { Meta } from "@utils/meta";
-import {
-  GetOrganizationReposListParams,
-  GetRepoItemParams,
-  IRepositoriesStore,
-} from "@utils/types";
 import axios from "axios";
 import {
   action,
@@ -29,6 +6,29 @@ import {
   observable,
   runInAction,
 } from "mobx";
+import {
+  gitHubRepoItemModel,
+  normalizeGitHubRepoItem,
+} from "store/models/gitHub/gitHubRepoItemApi/gitHubRepoItemApi";
+import {
+  CollectionModel,
+  getInitialCollectionModel,
+  linearizeCollection,
+  normalizeCollection,
+} from "store/models/shared/collection";
+import {
+  getRepository,
+  getRepositories,
+  getRepositoriesCount,
+} from "utils/api";
+import { getMoreFetch } from "utils/helpers";
+import { logger } from "utils/logger";
+import { Meta } from "utils/meta";
+import {
+  GetOrganizationReposListParams,
+  GetRepoItemParams,
+  IRepositoriesStore,
+} from "utils/types";
 
 type PrivateFields =
   | "_list"

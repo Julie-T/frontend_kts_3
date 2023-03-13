@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 
-import { Loader } from "@components/loader";
-import RootStore from "@store/RootStore";
-import { Meta } from "@utils/meta";
-import { useLocalStore } from "@utils/UseLocalStore";
+import { Loader } from "components/loader";
 import Markdown from "markdown-to-jsx";
 import { observer } from "mobx-react-lite";
+import { nanoid } from "nanoid";
 import { Link, useLocation } from "react-router-dom";
+import { RootStore } from "store/RootStore";
+import { Meta } from "utils/meta";
 
 import styles from "./RepositoryDescription.module.scss";
 
@@ -15,7 +15,6 @@ const RepositoryDescription: React.FC = observer(() => {
     () => new RootStore(),
     []
   ).queryRepository;
-  // const repositoryStore = useLocalStore(() => new RootStore()).queryRepository;
   const location = useLocation();
   const [_root, _repo, org, repoName]: Array<string> =
     location.pathname.split("/");
@@ -106,7 +105,9 @@ const RepositoryDescription: React.FC = observer(() => {
       {repositoryStore.repoItem?.topics && (
         <div className={styles.repository_description_tags}>
           {repositoryStore.repoItem?.topics.map((topic: string) => (
-            <div className={styles.repository_description_tag}>{topic}</div>
+            <div key={nanoid()} className={styles.repository_description_tag}>
+              {topic}
+            </div>
           ))}
         </div>
       )}
